@@ -12,7 +12,7 @@ namespace ScannerComponent
         {
             if (ScannerManager.Instance != null)
             {
-                ScannerManager.Instance.OnQRDetected += HandleCodeDetected;
+                ScannerManager.Instance.OnCodeDetected += HandleCodeDetected;
             }
         }
 
@@ -20,13 +20,13 @@ namespace ScannerComponent
         {
             if (ScannerManager.Instance != null)
             {
-                ScannerManager.Instance.OnQRDetected -= HandleCodeDetected;
+                ScannerManager.Instance.OnCodeDetected -= HandleCodeDetected;
             }
         }
 
-        private void HandleCodeDetected(string qrText)
+        private void HandleCodeDetected(DecodeResult qrText)
         {
-            onCodeScanned?.Invoke(qrText);
+            onCodeScanned?.Invoke(qrText.Text);
         }
     }
 }

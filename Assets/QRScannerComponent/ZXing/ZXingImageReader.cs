@@ -18,11 +18,11 @@ public class ZXingImageReader : MonoBehaviour, IImageReader
         };
     }
 
-    public DecodeResult DecodeImage(Color32[] pixels, int width, int height)
+    public DecodeResult DecodeImage(ImageFrame imageFrame)
     {
         try
         {
-            var result = reader.Decode(pixels, width, height);
+            var result = reader.Decode(imageFrame.pixels,imageFrame.width,imageFrame.height);
             if (result != null)
             {
                 // Extraemos las coordenadas 2D donde ZXing vio el código

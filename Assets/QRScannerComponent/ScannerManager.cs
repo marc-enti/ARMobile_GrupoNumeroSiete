@@ -28,7 +28,7 @@ namespace ScannerComponent
         public float scanInterval = 0.5f;
 
         // Nuestro evento C#
-        public event Action<string> OnQRDetected;
+        public event Action<DecodeResult> OnCodeDetected;
 
         private IImageProvider imageProvider;
         private IImageReader imageReader;
@@ -79,14 +79,28 @@ namespace ScannerComponent
 
         private void TryScan()
         {
-            // El Manager orquesta, pero no sabe CÓMO se saca la foto ni CÓMO se lee
             if (imageProvider.RequestImage(out ImageFrame imageFrame))
             {
-                string result = imageReader.DecodeImage(imageFrame);
+                DecodeResult result = imageReader.DecodeImage(imageFrame);
 
-                if (!string.IsNullOrEmpty(result))
+                if (result != null)
                 {
-                    OnQRDetected?.Invoke(result);
+                    if (result.ImagePoints != null && result.ImagePoints.Length > 0)
+                    {
+                        if (imageProvider.TryGetWorldTransform(
+                            result.ImagePoints,
+                            imageFrame.width,
+                            imageFrame.height,
+                            out Vector3 worldPosition,
+                            out Vector3 worldNormal))
+                        {
+                            result.WorldPosition = worldPosition;
+                            result.WorldNormal = worldNormal;
+                            result.HasWorldTransform = true;
+                        }
+                    }
+
+                    OnCodeDetected?.Invoke(result);
                 }
             }
         }
