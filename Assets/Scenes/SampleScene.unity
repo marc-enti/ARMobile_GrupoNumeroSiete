@@ -587,8 +587,10 @@ GameObject:
   m_Component:
   - component: {fileID: 188148736}
   - component: {fileID: 188148735}
+  - component: {fileID: 188148738}
+  - component: {fileID: 188148737}
   m_Layer: 0
-  m_Name: QRScannerManager
+  m_Name: ScannerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,23 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99b83724c8bb8248b1e01517779ef17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 134754c12caed14459e848a982f8d1ad, type: 2}
-  cameraManager: {fileID: 331264287}
-  OnQRDetected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1796759435}
-        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  scanInterval: 0.5
 --- !u!4 &188148736
 Transform:
   m_ObjectHideFlags: 0
@@ -638,6 +624,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &188148737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188148734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9993e81f8fcf9044ebe673600bab0552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &188148738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188148734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4129d2470b42bc41a6c87bbbe48073d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraManager: {fileID: 331264287}
 --- !u!1 &212114235
 GameObject:
   m_ObjectHideFlags: 0
@@ -6608,6 +6619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796759434}
   - component: {fileID: 1796759436}
+  - component: {fileID: 1796759437}
   - component: {fileID: 1796759435}
   m_Layer: 5
   m_Name: Text (TMP)
@@ -6734,6 +6746,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796759433}
   m_CullTransparentMesh: 1
+--- !u!114 &1796759437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796759433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2979693c375d9494aa9312b1ce06fd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCodeScanned:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1796759435}
+        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1835809108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2318766424490069697, guid: dae86721c71ee42018bbec0181a4e52e, type: 3}

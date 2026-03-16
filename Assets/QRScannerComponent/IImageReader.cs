@@ -1,6 +1,16 @@
 using UnityEngine;
 
-public interface IImageReader
+namespace ScannerComponent
 {
-    public string DecodeImage(Color32[] pixels, int width, int height);
+    public class DecodeResult
+    {
+        public string Text;
+        public Vector2[] ImagePoints;
+    }
+
+    public interface IImageReader
+    {
+        //DecodeResult DecodeImage(ImageFrame imageFrame);
+        string DecodeImage(ImageFrame imageFrame);
+    }
 }

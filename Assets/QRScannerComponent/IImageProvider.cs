@@ -1,6 +1,12 @@
 using UnityEngine;
 
-public interface IImageProvider
+namespace ScannerComponent
 {
-    public Color32[] RequestImage();
+    public interface IImageProvider
+    {
+        bool RequestImage(out ImageFrame imageFrame);
+
+        //bool TryGetWorldTransform(Vector2[] imagePoints, int imageWidth, int imageHeight, out Vector3 position, out Vector3 normal);
+    }
 }
+

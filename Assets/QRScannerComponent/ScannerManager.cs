@@ -1,120 +1,94 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
-using Unity.Collections;
-using UnityEngine.Rendering;
+using System;
 
-namespace QRScannerComponent
+namespace ScannerComponent
 {
-    public class ScannerManager : MonoBehaviour, IImageProvider, IImageReader
+    public struct ImageFrame
     {
-        private static ScannerManager _instance;
+        public Color32[] pixels;
+        public int width;
+        public int height;
 
-        private UnityEvent<string> OnQRDetected;
+        public bool IsValid
+        {
+            get
+            {
+                return pixels != null &&
+                       pixels.Length > 0 &&
+                       width > 0 &&
+                       height > 0;
+            }
+        }
+    }
+
+    public class ScannerManager : MonoBehaviour
+    {
+        public static ScannerManager Instance { get; private set; }
+
+        public float scanInterval = 0.5f;
+
+        // Nuestro evento C#
+        public event Action<string> OnQRDetected;
+
+        private IImageProvider imageProvider;
+        private IImageReader imageReader;
 
         private float timer = 0f;
         private bool isScanning = false;
-        private float scanInterval = 0.5f;
-
-        public static ScannerManager Instance
-        {
-            get { return _instance; }   
-        }
 
         private void Awake()
         {
-            _instance = this;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
         }
 
         private void Start()
         {
+            // Buscamos las interfaces en este mismo GameObject
+            imageProvider = GetComponent<IImageProvider>();
+            imageReader = GetComponent<IImageReader>();
+
+            if (imageProvider == null || imageReader == null)
+            {
+                Debug.LogError("Falta un IImageProvider o un IImageReader en el QRScannerManager.");
+                return;
+            }
+
             StartScanning();
         }
 
-        public void StartScanning()
-        {
-            isScanning = true;
-        }
-
-        public void StopScanning()
-        {
-            isScanning = false;
-        }
+        public void StartScanning() => isScanning = true;
+        public void StopScanning() => isScanning = false;
 
         private void Update()
         {
+            if (!isScanning) return;
+
             timer += Time.deltaTime;
 
             if (timer >= scanInterval)
             {
                 timer = 0f;
-                TryScanCurrentFrame();
+                TryScan();
             }
         }
 
-        private void TryScanCurrentFrame()
+        private void TryScan()
         {
-            
+            // El Manager orquesta, pero no sabe CÓMO se saca la foto ni CÓMO se lee
+            if (imageProvider.RequestImage(out ImageFrame imageFrame))
+            {
+                string result = imageReader.DecodeImage(imageFrame);
 
-            //buffer.Dispose();
-
-            //string qrResult = QRFunctions.DecodeQR(pixels, conversionParams.outputDimensions.x, conversionParams.outputDimensions.y);
-
-            //if (!string.IsNullOrEmpty(qrResult))
-            //{
-            //    Debug.Log("<color=green>¡QR Encontrado!</color> Contenido: " + qrResult);
-            //    OnQRDetected.Invoke(qrResult);
-            //}
+                if (!string.IsNullOrEmpty(result))
+                {
+                    OnQRDetected?.Invoke(result);
+                }
+            }
         }
-
-        public Color32[] RequestImage()
-        {
-            //if (!cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
-            //{
-            //    return;
-            //}
-
-            //Hacemos la imagen mas pequeña para mejorar rendimiento del procesador del mobil
-            //var conversionParams = new XRCpuImage.ConversionParams
-            //{
-            //    inputRect = new RectInt(0, 0, image.width, image.height),
-            //    outputDimensions = new Vector2Int(image.width / 2, image.height / 2),
-            //    outputFormat = TextureFormat.RGBA32,
-            //    transformation = XRCpuImage.Transformation.None
-            //};
-
-            //int size = image.GetConvertedDataSize(conversionParams);
-            //var buffer = new NativeArray<byte>(size, Allocator.Temp);
-
-            //image.Convert(conversionParams, buffer);
-
-            //image.Dispose(); //evitar memory leaks
-
-            //Color32[] pixels = buffer.Reinterpret<Color32>(1).ToArray();
-
-            //return pixels;
-            return null;
-        }
-
-        public string DecodeImage(Color32[] pixels, int width, int height)
-        {
-            //try
-            //{
-            //    var result = reader.Decode(pixels, width, height);
-
-            //    if (result != null)
-            //    {
-            //        return result.Text;
-            //    }
-            //}
-            //catch (System.Exception ex)
-            //{
-            //    Debug.LogWarning("Error al decodificar QR: " + ex.Message);
-            //}
-
-            return null;
-        }
-
     }
 }
