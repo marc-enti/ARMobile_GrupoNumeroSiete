@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 56653745}
   - component: {fileID: 56653744}
   - component: {fileID: 56653743}
-  - component: {fileID: 56653742}
   m_Layer: 0
   m_Name: FaceTracker
   m_TagString: Untagged
@@ -138,18 +137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &56653742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56653741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf10795c19e0bb48a42426a786a9b5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &56653743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,12 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startOnAwake: 1
-  OnFaceDetectedUnity:
-    m_PersistentCalls:
-      m_Calls: []
-  OnFaceLostUnity:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &56653744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,8 +187,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 341820927}
-  - component: {fileID: 341820926}
   - component: {fileID: 341820925}
+  - component: {fileID: 341820928}
   m_Layer: 0
   m_Name: GazeVisualizer
   m_TagString: Untagged
@@ -228,8 +209,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gazeLength: 0.5
-  gazeColor: {r: 0, g: 1, b: 1, a: 1}
---- !u!120 &341820926
+  lineMaterial: {fileID: 2100000, guid: 428aa5dd787a9a348bab9b9acb46743c, type: 2}
+--- !u!4 &341820927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341820924}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &341820928
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -336,21 +332,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!4 &341820927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341820924}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1144428894
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +365,7 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_FacePrefab: {fileID: 8827194758465529469, guid: daefaad61dec78f4c8682b7526504a11, type: 3}
+  m_FacePrefab: {fileID: 0}
   m_MaximumFaceCount: 1
 --- !u!114 &1144428899
 MonoBehaviour:

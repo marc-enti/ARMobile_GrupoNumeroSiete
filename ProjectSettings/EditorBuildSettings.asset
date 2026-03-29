@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/CodeScannerComponent/Samples/ScannerSampleScene.unity
     guid: 4755b35b590504809a7525fd2109c2e2
   - enabled: 1
-    path: Assets/FaceDetectorComponent/FaceDetector.unity
+    path: Assets/FaceDetectorComponent/Scenes/FaceDetector.unity
     guid: 4819f4a42997ef748bf0db9d773eb445
   - enabled: 0
     path: Assets/Scenes/QrScanner.unity
