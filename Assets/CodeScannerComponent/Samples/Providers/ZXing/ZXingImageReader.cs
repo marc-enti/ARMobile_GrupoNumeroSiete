@@ -18,22 +18,22 @@ public class ZXingImageReader : MonoBehaviour, IImageReader
         };
     }
 
-    public DecodeResult DecodeImage(ImageFrame imageFrame)
+    public ReadResult DecodeImage(ImageFrame imageFrame)
     {
         try
         {
-            var result = reader.Decode(imageFrame.pixels,imageFrame.width,imageFrame.height);
+            var result = reader.Decode(imageFrame.pixels, imageFrame.width, imageFrame.height);
             if (result != null)
             {
-                // Extraemos las coordenadas 2D donde ZXing vio el código
                 Vector2[] points = new Vector2[result.ResultPoints.Length];
                 for (int i = 0; i < points.Length; i++)
                 {
                     points[i] = new Vector2(result.ResultPoints[i].X, result.ResultPoints[i].Y);
                 }
 
-                return new DecodeResult
+                return new ReadResult
                 {
+                    Success = true,
                     Text = result.Text,
                     ImagePoints = points
                 };
@@ -41,9 +41,9 @@ public class ZXingImageReader : MonoBehaviour, IImageReader
         }
         catch (System.Exception ex)
         {
-            Debug.LogWarning("Error al decodificar: " + ex.Message);
+            Debug.LogWarning("Decoding error: " + ex.Message);
         }
 
-        return null;
+        return new ReadResult { Success = false };
     }
 }

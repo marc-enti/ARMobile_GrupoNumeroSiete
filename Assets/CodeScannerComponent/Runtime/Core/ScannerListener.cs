@@ -5,8 +5,8 @@ namespace ScannerComponent
 {
     public class ScannerListener : MonoBehaviour
     {
-        [Tooltip("Añade aquí las funciones que quieres que se ejecuten cuando se lea un QR.")]
-        public UnityEvent<string> onCodeScanned;
+        [Tooltip("Triggered when a code is scanned, returning its text and 3D position.")]
+        public UnityEvent<DecodeResult> onCodeScanned;
 
         private void OnEnable()
         {
@@ -24,9 +24,9 @@ namespace ScannerComponent
             }
         }
 
-        private void HandleCodeDetected(DecodeResult qrText)
+        private void HandleCodeDetected(DecodeResult result)
         {
-            onCodeScanned?.Invoke(qrText.Text);
+            onCodeScanned?.Invoke(result);
         }
     }
 }

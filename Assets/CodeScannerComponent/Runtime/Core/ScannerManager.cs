@@ -3,31 +3,13 @@ using System;
 
 namespace ScannerComponent
 {
-    public struct ImageFrame
-    {
-        public Color32[] pixels;
-        public int width;
-        public int height;
-
-        public bool IsValid
-        {
-            get
-            {
-                return pixels != null &&
-                       pixels.Length > 0 &&
-                       width > 0 &&
-                       height > 0;
-            }
-        }
-    }
-
     public class ScannerManager : MonoBehaviour
     {
         public static ScannerManager Instance { get; private set; }
 
+        [Tooltip("Interval in seconds between each scan attempt.")]
         public float scanInterval = 0.5f;
 
-        // Nuestro evento C#
         public event Action<DecodeResult> OnCodeDetected;
 
         private IImageProvider imageProvider;
@@ -38,27 +20,32 @@ namespace ScannerComponent
 
         private void Awake()
         {
+            // Patrón Singleton
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
                 return;
             }
             Instance = this;
-        }
 
-        private void Start()
-        {
-            // Buscamos las interfaces en este mismo GameObject
             imageProvider = GetComponent<IImageProvider>();
             imageReader = GetComponent<IImageReader>();
 
             if (imageProvider == null || imageReader == null)
             {
-                Debug.LogError("Falta un IImageProvider o un IImageReader en el QRScannerManager.");
+                Debug.LogError("Missing IImageProvider or IImageReader in the ScannerManager. The component will be disabled.");
+                enabled = false;
                 return;
             }
+        }
 
-            StartScanning();
+        private void Start()
+        {
+            // Solo iniciamos si el script no fue desactivado en el Awake
+            if (enabled)
+            {
+                StartScanning();
+            }
         }
 
         public void StartScanning() => isScanning = true;
@@ -79,28 +66,34 @@ namespace ScannerComponent
 
         private void TryScan()
         {
-            if (imageProvider.RequestImage(out ImageFrame imageFrame))
+            if (imageProvider.RequestImage(out ImageFrame imageFrame) && imageFrame.IsValid)
             {
-                DecodeResult result = imageReader.DecodeImage(imageFrame);
+                ReadResult readResult = imageReader.DecodeImage(imageFrame);
 
-                if (result != null)
+                if (readResult.Success)
                 {
-                    if (result.ImagePoints != null && result.ImagePoints.Length > 0)
+                    DecodeResult finalResult = new DecodeResult
+                    {
+                        Text = readResult.Text,
+                        HasWorldTransform = false
+                    };
+
+                    if (readResult.ImagePoints != null && readResult.ImagePoints.Length > 0)
                     {
                         if (imageProvider.TryGetWorldTransform(
-                            result.ImagePoints,
+                            readResult.ImagePoints,
                             imageFrame.width,
                             imageFrame.height,
                             out Vector3 worldPosition,
                             out Vector3 worldNormal))
                         {
-                            result.WorldPosition = worldPosition;
-                            result.WorldNormal = worldNormal;
-                            result.HasWorldTransform = true;
+                            finalResult.WorldPosition = worldPosition;
+                            finalResult.WorldNormal = worldNormal;
+                            finalResult.HasWorldTransform = true;
                         }
                     }
 
-                    OnCodeDetected?.Invoke(result);
+                    OnCodeDetected?.Invoke(finalResult);
                 }
             }
         }
