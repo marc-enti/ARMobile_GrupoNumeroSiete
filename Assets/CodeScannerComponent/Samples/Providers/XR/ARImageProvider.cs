@@ -7,10 +7,10 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARImageProvider : MonoBehaviour, IImageProvider
 {
-    [Tooltip("Arrastra aquí la Main Camera de AR Foundation (AR Camera Manager)")]
+    [Tooltip("Assign the AR Camera Manager here.")]
     public ARCameraManager cameraManager;
 
-    [Tooltip("Assign the AR Raycast Manager here (usually located on the XR Origin or AR Session Origin).")]
+    [Tooltip("Assign the AR Raycast Manager here.")]
     public ARRaycastManager raycastManager;
 
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();

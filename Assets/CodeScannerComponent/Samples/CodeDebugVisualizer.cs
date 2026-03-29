@@ -11,7 +11,6 @@ public class CodeDebugVisualizer : MonoBehaviour
     public void VisualizeCodeLocation(DecodeResult result)
     {
         Debug.Log($"Code successfully scanned: {result.Text}");
-        Handheld.Vibrate();
 
         if (result.HasWorldTransform)
         {
