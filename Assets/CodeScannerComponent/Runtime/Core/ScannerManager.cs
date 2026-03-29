@@ -20,7 +20,6 @@ namespace ScannerComponent
 
         private void Awake()
         {
-            // Patrón Singleton
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -41,7 +40,6 @@ namespace ScannerComponent
 
         private void Start()
         {
-            // Solo iniciamos si el script no fue desactivado en el Awake
             if (enabled)
             {
                 StartScanning();
@@ -66,36 +64,25 @@ namespace ScannerComponent
 
         private void TryScan()
         {
-            if (imageProvider.RequestImage(out ImageFrame imageFrame) && imageFrame.IsValid)
+            if (!imageProvider.RequestImage(out ImageFrame frame))
+                return;
+
+            var readResult = imageReader.DecodeImage(frame);
+
+            if (!readResult.Success)
+                return;
+
+            bool has3D = imageProvider.TryGetWorldTransform(readResult.ImagePoints, frame.width, frame.height, out Vector3 pos, out Vector3 norm);
+
+            DecodeResult finalResult = new DecodeResult
             {
-                ReadResult readResult = imageReader.DecodeImage(imageFrame);
+                Text = readResult.Text,
+                HasWorldTransform = has3D,
+                WorldPosition = pos,
+                WorldNormal = norm
+            };
 
-                if (readResult.Success)
-                {
-                    DecodeResult finalResult = new DecodeResult
-                    {
-                        Text = readResult.Text,
-                        HasWorldTransform = false
-                    };
-
-                    if (readResult.ImagePoints != null && readResult.ImagePoints.Length > 0)
-                    {
-                        if (imageProvider.TryGetWorldTransform(
-                            readResult.ImagePoints,
-                            imageFrame.width,
-                            imageFrame.height,
-                            out Vector3 worldPosition,
-                            out Vector3 worldNormal))
-                        {
-                            finalResult.WorldPosition = worldPosition;
-                            finalResult.WorldNormal = worldNormal;
-                            finalResult.HasWorldTransform = true;
-                        }
-                    }
-
-                    OnCodeDetected?.Invoke(finalResult);
-                }
-            }
+            OnCodeDetected?.Invoke(finalResult);
         }
     }
 }

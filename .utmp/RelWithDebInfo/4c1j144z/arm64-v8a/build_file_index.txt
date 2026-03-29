@@ -1,0 +1,2 @@
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

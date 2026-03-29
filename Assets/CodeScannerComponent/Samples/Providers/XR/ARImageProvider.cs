@@ -67,14 +67,18 @@ public class ARImageProvider : MonoBehaviour, IImageProvider
         float yRatio = centerPoint.y / imageHeight;
         Vector2 screenPoint = new Vector2(xRatio * Screen.width, yRatio * Screen.height);
 
-        /* * NOTA IMPORTANTE PARA MÓVILES: 
-         * La cámara del móvil suele capturar en formato apaisado (Landscape), mientras que la 
-         * pantalla suele estar en vertical (Portrait). Si al probarlo notas que la posición 
-         * 3D está invertida o desviada, cambia la línea de arriba por esta:
-         * * Vector2 screenPoint = new Vector2(yRatio * Screen.width, xRatio * Screen.height);
-         */
+        UnityEngine.XR.ARSubsystems.TrackableType trackableTypes =
+            UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon;
 
-        if (raycastManager.Raycast(screenPoint, hits, TrackableType.PlaneWithinPolygon))
+        if (raycastManager.Raycast(screenPoint, hits, trackableTypes))
+        {
+            position = hits[0].pose.position;
+            normal = hits[0].pose.up;
+            return true;
+        }
+
+        Vector2 centerScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        if (raycastManager.Raycast(centerScreen, hits, trackableTypes))
         {
             position = hits[0].pose.position;
             normal = hits[0].pose.up;

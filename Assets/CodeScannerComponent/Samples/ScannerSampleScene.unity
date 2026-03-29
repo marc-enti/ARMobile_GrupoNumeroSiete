@@ -209,8 +209,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2102014986}
-        m_TargetAssemblyTypeName: QRVisualizer, Assembly-CSharp
-        m_MethodName: MostrarCodigoAR
+        m_TargetAssemblyTypeName: CodeDebugVisualizer, Assembly-CSharp
+        m_MethodName: VisualizeCodeLocation
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -610,8 +610,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2512387470231460711}
   - component: {fileID: 2512387470231460710}
-  - component: {fileID: 2512387470231460731}
   - component: {fileID: 2512387470231460732}
+  - component: {fileID: 2512387470231460731}
   m_Layer: 0
   m_Name: XR Origin (AR Rig)
   m_TagString: Untagged
@@ -650,7 +650,7 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_PlanePrefab: {fileID: 0}
+  m_PlanePrefab: {fileID: 8827194758465529469, guid: daefaad61dec78f4c8682b7526504a11, type: 3}
   m_DetectionMode: -1
 --- !u!1 &2512387470665874425
 GameObject:

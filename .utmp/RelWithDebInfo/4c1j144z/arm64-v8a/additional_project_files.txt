@@ -1,0 +1,17 @@
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\GAToUnityCallbacks.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroEnd.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroHeaderBegin.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroSourceBegin.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAApplication.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAConfiguration.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGADebug.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAEvents.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAInput.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboard.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboardCallbacks.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGATypes.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAVersion.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGACallbacks.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAConfigurationCallbacks.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAKeyEventCallbacks.h
+D:\uni\repos\4rt\ARMobile_GrupoNumeroSiete\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAMotionEventCallbacks.h

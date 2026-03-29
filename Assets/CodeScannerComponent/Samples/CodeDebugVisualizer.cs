@@ -10,7 +10,8 @@ public class CodeDebugVisualizer : MonoBehaviour
 
     public void VisualizeCodeLocation(DecodeResult result)
     {
-        Debug.Log($"¡QR Detectado con éxito!: {result.Text}");
+        Debug.Log($"Code successfully scanned: {result.Text}");
+        Handheld.Vibrate();
 
         if (result.HasWorldTransform)
         {
@@ -28,7 +29,7 @@ public class CodeDebugVisualizer : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("QR leído en 2D, pero AR Foundation aún no ha detectado la superficie física para colocarlo en 3D.");
+            Debug.LogWarning("Code read in 2D, but AR Foundation hasn't detected the physical surface yet.");
         }
     }
 }
